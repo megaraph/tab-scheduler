@@ -1,62 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+    <head>
+        <meta charset="UTF-8" />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- Styles -->
+        <link rel="stylesheet" href="styles/main.css" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
 
-    <!-- Scripts -->
-    <script src="popup.js"></script>
+        <!-- Scripts -->
+        <script src="popup.js"></script>
 
-    <!-- Identifiers -->
-    <title>Tab Scheduler</title>
-</head>
-<body>
-    <section>
-        <div class="container">
-
-            <div class="header">
-                <img class="brand-image" src="images/brand.png" alt="">
-                <h1>SIMPLE TAB SCHEDULER</h1>
-            </div>
-
-            <div class="buttons">
-                <select name="daySelector" id="daySelector">
-                    <option value="sunday">Sunday</option>
-                    <option value="monday">Monday</option>
-                    <option value="tuesday">Tuesday</option>
-                    <option value="wednesday">Wednesday</option>
-                    <option value="thursday">Thursday</option>
-                    <option value="friday">Friday</option>
-                    <option value="saturday">Saturday</option>
-                </select>
-    
-                <button id="addButton">
-                    <img class="add-span" src="images/plus.svg" alt="">
-                    <span class="add-text">NEW ITEM</span>
-                </button>
-            </div>
-
-            <div class="scheduledItemsList" id="itemsList">
-                <!-- <div class="scheduledItem" id="scheduledItem-0">
-                    <div class="info-area">
-                        <h2>Homeroom - 10</h2>
-                        <div class="linkArea">
-                            <input type="text" value="https://www.figma.com/file/Ea4PAWce8gb0aWPpXdHTOM/Simple-Tab-Scheduler?node-id=19%3A129" readonly>
-                        </div>
-                        <div class="timeArea">
-                            <input type="time" value="07:20" readonly>
-                        </div>
-                    </div>
-                    <div class="toolsArea">
-                            <span class="material-icons" id="edit-0">edit</span>
-                            <span class="material-icons" id="delete-0">delete</span>
-                    </div> -->
+        <!-- Identifiers -->
+        <title>Tab Scheduler</title>
+    </head>
+    <body>
+        <section>
+            <div class="container">
+                <div class="header">
+                    <img class="brand-image" src="images/brand.png" alt="" />
+                    <h1>SIMPLE TAB SCHEDULER</h1>
                 </div>
+
+                <div class="buttons">
+                    <select name="daySelector" id="daySelector">
+                        <option value="sunday">Sunday</option>
+                        <option value="monday">Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wednesday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
+                        <option value="friday">Friday</option>
+                        <option value="saturday">Saturday</option>
+                    </select>
+
+                    <button id="addButton">
+                        <img class="add-span" src="images/plus.svg" alt="" />
+                        <span class="add-text">NEW ITEM</span>
+                    </button>
+                </div>
+
+                <div class="scheduledItemsList" id="itemsList"></div>
             </div>
-        </div>
-    </section>
-</body>
+        </section>
+    </body>
 </html>

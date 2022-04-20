@@ -1,12 +1,20 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const days = {0: 'sunday', 1: 'monday', 2: 'tuesday', 3: 'wednesday', 4: 'thursday', 5: 'friday', 6: 'saturday'};
-    const addButton = document.getElementById('addButton');
-    const scheduledItemsEl = document.getElementById('itemsList');
-    const daySelector = document.getElementById('daySelector');
+document.addEventListener("DOMContentLoaded", function () {
+    const days = {
+        0: "sunday",
+        1: "monday",
+        2: "tuesday",
+        3: "wednesday",
+        4: "thursday",
+        5: "friday",
+        6: "saturday",
+    };
+    const addButton = document.getElementById("addButton");
+    const scheduledItemsEl = document.getElementById("itemsList");
+    const daySelector = document.getElementById("daySelector");
 
     var scheduledItems = [];
-    const localStorageItems = localStorage.getItem('scheduledItems');
-    var storageTest = chrome.storage.sync.get(['scheduledItems'], (result) => {
+    const localStorageItems = localStorage.getItem("scheduledItems");
+    var storageTest = chrome.storage.sync.get(["scheduledItems"], (result) => {
         console.log(result.scheduledItems);
     });
     if (localStorageItems) {
@@ -14,17 +22,17 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Default selected day is the current day
-    currentDay = (new Date()).getDay();
+    currentDay = new Date().getDay();
     daySelector.selectedIndex = currentDay;
     renderItems(days[currentDay], scheduledItems);
 
     // Render items when switching between days
-    daySelector.addEventListener('change', () => {
+    daySelector.addEventListener("change", () => {
         renderItems(daySelector.value, scheduledItems);
     });
 
     // Add new scheduled item
-    addButton.addEventListener('click', () => {
+    addButton.addEventListener("click", () => {
         const selectedDay = daySelector.value;
 
         // Setting default time to 30 minutes ahead of current date if first item (empty array),
@@ -32,53 +40,64 @@ document.addEventListener("DOMContentLoaded", function() {
         var defaultDate = new Date();
         var defaultTime = "";
 
-        if (scheduledItems.length < 1) { // TODO (fix flaw): When switched to new day, starts off at previous time instead of current time
+        if (scheduledItems.length < 1) {
+            // TODO (fix flaw): When switched to new day, starts off at previous time instead of current time
             defaultDate.setMinutes(defaultDate.getMinutes() + 30);
         } else {
-            let previousTimeString = (scheduledItems[previousItem(selectedDay, scheduledItems)]).time.split(':');
+            let previousTimeString =
+                scheduledItems[
+                    previousItem(selectedDay, scheduledItems)
+                ].time.split(":");
             defaultDate.setHours(Number(previousTimeString[0]));
             defaultDate.setMinutes(Number(previousTimeString[1]) + 30);
         }
-        defaultTime = `${twoDigits(defaultDate.getHours())}:${twoDigits(defaultDate.getMinutes())}`;
+        defaultTime = `${twoDigits(defaultDate.getHours())}:${twoDigits(
+            defaultDate.getMinutes()
+        )}`;
 
         // currentId = 0 if list is empty else id of item with highest id plus one
-        currentId = scheduledItems.length < 1 ? 0 : Number(scheduledItems[findMaxIdIndex(scheduledItems)].id + 1);
+        currentId =
+            scheduledItems.length < 1
+                ? 0
+                : Number(scheduledItems[findMaxIdIndex(scheduledItems)].id + 1);
 
         // Creating scheduled item and adding to scheduledItems array
         newItem = {
-            'id': currentId,
-            'day': selectedDay,
-            'title': 'New Item',
-            'time': defaultTime,
-            'link': ''
+            id: currentId,
+            day: selectedDay,
+            title: "New Item",
+            time: defaultTime,
+            link: "",
         };
         scheduledItems.push(newItem);
         renderItems(selectedDay, scheduledItems);
     });
 
     // Edit or Delete a scheduled item
-    scheduledItemsEl.addEventListener('click', (element) => {
-        const elementTuple = element.target.id.split('-');
+    scheduledItemsEl.addEventListener("click", (element) => {
+        const elementTuple = element.target.id.split("-");
         const elementAction = elementTuple[0];
         const elementId = elementTuple[1];
 
-        if (elementAction !== 'edit' 
-        && elementAction !== 'delete' 
-        && elementAction !== 'save') {
+        if (
+            elementAction !== "edit" &&
+            elementAction !== "delete" &&
+            elementAction !== "save"
+        ) {
             return;
         }
 
-        if (elementAction === 'edit') {
+        if (elementAction === "edit") {
             editScheduledItem(elementId, scheduledItems);
             return;
         }
 
-        if (elementAction === 'save') {
+        if (elementAction === "save") {
             saveScheduledItem(elementId, scheduledItems);
             return;
         }
 
-        if (elementAction === 'delete') {
+        if (elementAction === "delete") {
             deleteScheduledItem(elementId, scheduledItems);
             return;
         }
@@ -86,30 +105,30 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function twoDigits(number) {
-    return (number < 10 ? '0' : '') + number;
+    return (number < 10 ? "0" : "") + number;
 }
 
 function renderItems(selectedDay, scheduledItems) {
-    const scheduledItemsEl = document.getElementById('itemsList');
+    const scheduledItemsEl = document.getElementById("itemsList");
     scheduledItemsEl.innerHTML = "";
 
-    localStorage.setItem('scheduledItems', JSON.stringify(scheduledItems));
-    chrome.storage.sync.set({'scheduledItems': scheduledItems}, () => {
-        console.log('Set Item ' + scheduledItems);
+    localStorage.setItem("scheduledItems", JSON.stringify(scheduledItems));
+    chrome.storage.sync.set({ scheduledItems: scheduledItems }, () => {
+        console.log("Set Item " + scheduledItems);
     });
     scheduledItems = sortedByDate(scheduledItems);
 
     for (let i = 0; i < scheduledItems.length; i++) {
-        const scheduledItem = scheduledItems[i]
+        const scheduledItem = scheduledItems[i];
 
         if (scheduledItem.day !== selectedDay) {
             continue;
         }
-        
+
         // Div element
-        const newDiv = document.createElement('div');
-        newDiv.id = `scheduledItem-${scheduledItem.id}`
-        newDiv.classList.add('scheduledItem');
+        const newDiv = document.createElement("div");
+        newDiv.id = `scheduledItem-${scheduledItem.id}`;
+        newDiv.classList.add("scheduledItem");
 
         newDiv.innerHTML = `
             <div class="info-area">
@@ -125,7 +144,7 @@ function renderItems(selectedDay, scheduledItems) {
                     <span class="material-icons" id="edit-${scheduledItem.id}">edit</span>
                     <span class="material-icons" id="delete-${scheduledItem.id}">delete</span>
             </div>
-        `
+        `;
 
         createAlarm(scheduledItem.id, scheduledItem.time, scheduledItem.day);
         scheduledItemsEl.appendChild(newDiv);
@@ -134,14 +153,16 @@ function renderItems(selectedDay, scheduledItems) {
 
 function editScheduledItem(scheduledItemId, scheduledItems) {
     var indexOfScheduledItem = findIndexOf(scheduledItemId, scheduledItems);
-    const scheduledItemEl = document.getElementById(`scheduledItem-${scheduledItemId}`);
+    const scheduledItemEl = document.getElementById(
+        `scheduledItem-${scheduledItemId}`
+    );
     const scheduledItem = scheduledItems[indexOfScheduledItem];
-    
+
     scheduledItemEl.innerHTML = `
         <div class="info-area">
         <input class="title-edit" type="text" id="title-${scheduledItem.id}" value="${scheduledItem.title}">
             <div class="linkArea-edit">
-                <input type="text" id="link-${scheduledItem.id}" placeholder="Enter a meet link" value="${scheduledItem.link}">
+                <input type="text" id="link-${scheduledItem.id}" placeholder="Enter a URL" value="${scheduledItem.link}">
             </div>
             <div class="timeArea-edit">
                 <input type="time" id="time-${scheduledItem.id}" value="${scheduledItem.time}">
@@ -150,12 +171,14 @@ function editScheduledItem(scheduledItemId, scheduledItems) {
         <div class="toolsArea">
                 <span class="material-icons" id="save-${scheduledItem.id}">save</span>
         </div>
-    `
+    `;
 }
 
 function saveScheduledItem(scheduledItemId, scheduledItems) {
     var indexOfScheduledItem = findIndexOf(scheduledItemId, scheduledItems);
-    const editedTitle = document.getElementById(`title-${scheduledItemId}`).value;
+    const editedTitle = document.getElementById(
+        `title-${scheduledItemId}`
+    ).value;
     const editedTime = document.getElementById(`time-${scheduledItemId}`).value;
     const editedLink = document.getElementById(`link-${scheduledItemId}`).value;
 
@@ -178,9 +201,9 @@ function deleteScheduledItem(scheduledItemId, scheduledItems) {
 
 function findIndexOf(scheduledItemId, scheduledItems) {
     var index = 0;
-    for(let i = 0; i < scheduledItems.length; i++) {
-        scheduledItem = scheduledItems[i]
-        
+    for (let i = 0; i < scheduledItems.length; i++) {
+        scheduledItem = scheduledItems[i];
+
         if (scheduledItem.id == scheduledItemId) {
             index = i;
             return index;
@@ -197,7 +220,7 @@ function findMaxIdIndex(scheduledItems) {
         return 0;
     }
 
-    for(let i = 0; i < scheduledItems.length; i++) {
+    for (let i = 0; i < scheduledItems.length; i++) {
         var scheduledItem = scheduledItems[i];
 
         if (scheduledItem.id > maxId[0]) {
@@ -209,22 +232,25 @@ function findMaxIdIndex(scheduledItems) {
 }
 
 function sortedByDate(scheduledItems) {
-    sortedArray =  scheduledItems.sort(function (scheduledItemA, scheduledItemB) {
-        let year = (new Date()).getFullYear();
-        let month = (new Date()).getMonth();
-        let day = (new Date()).getDate();
-    
-        let stringTimeA = (scheduledItemA.time).split(":");
+    sortedArray = scheduledItems.sort(function (
+        scheduledItemA,
+        scheduledItemB
+    ) {
+        let year = new Date().getFullYear();
+        let month = new Date().getMonth();
+        let day = new Date().getDate();
+
+        let stringTimeA = scheduledItemA.time.split(":");
         let hourA = Number(stringTimeA[0]);
         let minA = Number(stringTimeA[1]);
-    
-        let stringTimeB = (scheduledItemB.time).split(":");
+
+        let stringTimeB = scheduledItemB.time.split(":");
         let hourB = Number(stringTimeB[0]);
         let minB = Number(stringTimeB[1]);
-    
+
         let dateA = new Date(year, month, day, hourA, minA);
         let dateB = new Date(year, month, day, hourB, minB);
-    
+
         return dateA - dateB;
     });
 
@@ -238,7 +264,7 @@ function previousItem(day, scheduledItems) {
         return 0;
     }
 
-    for(let i = 0; i < scheduledItems.length; i++) {
+    for (let i = 0; i < scheduledItems.length; i++) {
         var scheduledItem = scheduledItems[i];
 
         if (scheduledItem.day === day && scheduledItem.id > previousItem[0]) {
@@ -250,7 +276,15 @@ function previousItem(day, scheduledItems) {
 }
 
 function createAlarm(scheduledItemId, timeString, day) {
-    const days = {0: 'sunday', 1: 'monday', 2: 'tuesday', 3: 'wednesday', 4: 'thursday', 5: 'friday', 6: 'saturday'};
+    const days = {
+        0: "sunday",
+        1: "monday",
+        2: "tuesday",
+        3: "wednesday",
+        4: "thursday",
+        5: "friday",
+        6: "saturday",
+    };
     const now = new Date();
     const currentTime = now.getTime();
 
@@ -260,7 +294,7 @@ function createAlarm(scheduledItemId, timeString, day) {
     }
 
     var alarmId = `scheduledItem-${scheduledItemId}`;
-    var timeTuple = timeString.split(':');
+    var timeTuple = timeString.split(":");
 
     var year = now.getFullYear();
     var month = now.getMonth();
@@ -271,11 +305,11 @@ function createAlarm(scheduledItemId, timeString, day) {
     var whenToRing = alarmTime.getTime();
 
     // Don't create alarm if alarm time is already behind current time
-    if ((currentTime - whenToRing) > 0) {
+    if (currentTime - whenToRing > 0) {
         return;
     }
 
     chrome.alarms.create(alarmId, {
-        when: whenToRing
+        when: whenToRing,
     });
 }
