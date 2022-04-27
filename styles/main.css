@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
 * {
     margin: 0;
@@ -6,16 +6,16 @@
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     width: 350px;
     max-height: 600px;
-    background: #090E27;
+    background: #090e27;
 }
 
 section {
     width: 350px;
     height: 570px;
-    background: #090E27;
+    background: #090e27;
 }
 
 .container {
@@ -40,8 +40,13 @@ h1 {
     border-bottom: 2px solid #737785;
 }
 
-/* END OF HEADER */
+.header small {
+    color: #737785;
+    padding-top: 5px;
+    margin-left: 5px;
+}
 
+/* END OF HEADER */
 
 /* BUTTONS */
 .buttons {
@@ -58,10 +63,10 @@ h1 {
     border-radius: 2px;
     background: linear-gradient(
         89.73deg,
-        #01AEF2 0.19%,
-        #00BFEC 34.94%,
-        #00D9D8 69.17%,
-        #01E7CB 99.77%
+        #01aef2 0.19%,
+        #00bfec 34.94%,
+        #00d9d8 69.17%,
+        #01e7cb 99.77%
     );
 }
 
@@ -82,10 +87,10 @@ h1 {
 }
 
 #daySelector {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 700;
-    color: #9DA1B1;
-    background: #181C3B;
+    color: #9da1b1;
+    background: #181c3b;
     border: transparent;
     width: 195px;
     padding: 7px;
@@ -96,7 +101,6 @@ h1 {
     cursor: pointer;
 }
 /* END OF BUTTONS */
-
 
 /* SCHEDULED ITEMS */
 ::-webkit-scrollbar {
@@ -110,7 +114,7 @@ h1 {
 
 ::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background-color: #8E8F9A;
+    background-color: #8e8f9a;
 }
 
 .scheduledItemsList {
@@ -121,7 +125,7 @@ h1 {
 .scheduledItem {
     padding-top: 7px;
     padding-bottom: 7px;
-    background: #181C3B;
+    background: #181c3b;
     border-radius: 2px;
     max-width: 295px;
     display: flex;
@@ -133,32 +137,32 @@ h1 {
 .info-area {
     padding-left: 6px;
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     justify-content: center;
 }
 
 h2 {
     font-size: 16px;
     font-weight: 700;
-    color: #C4C4D4;
+    color: #c4c4d4;
     max-width: 211px;
     padding-bottom: 7px;
 }
 
 .title-edit {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 700;
     font-size: 16px;
     background: transparent;
-    border: 1px solid #3A3E5B;
+    border: 1px solid #3a3e5b;
     padding: 5px;
-    color: #C4C4D4;
+    color: #c4c4d4;
     max-width: 211px;
     margin-bottom: 7px;
 }
 
 .linkArea input[type="text"] {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     width: 200px;
     margin-bottom: 7px;
     background: transparent;
@@ -169,12 +173,12 @@ h2 {
 }
 
 .linkArea-edit input[type="text"] {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     width: 200px;
     padding: 5px;
     margin-bottom: 7px;
     background: transparent;
-    border: 1px solid #3A3E5B;
+    border: 1px solid #3a3e5b;
     color: #636581;
     font-weight: 600;
     font-size: 11px;
@@ -187,7 +191,7 @@ h2 {
 }
 
 .timeArea input[type="time"] {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 600;
     font-size: 12px;
     border: none;
@@ -196,11 +200,11 @@ h2 {
 }
 
 .timeArea-edit input[type="time"] {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     padding: 5px;
     font-weight: 600;
     font-size: 12px;
-    border: 1px solid #3A3E5B;
+    border: 1px solid #3a3e5b;
     background: transparent;
     color: #636581;
 }
@@ -210,7 +214,7 @@ h2 {
     margin-bottom: 10px;
     width: 50px;
     min-height: 100px;
-    border-left: 2px solid #3A3E5B;
+    border-left: 2px solid #3a3e5b;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -218,8 +222,8 @@ h2 {
 }
 
 .material-icons {
-    color: #A3A3AC;
-    background: #090E27;
+    color: #a3a3ac;
+    background: #090e27;
     border-radius: 100%;
     padding: 5px;
 }
