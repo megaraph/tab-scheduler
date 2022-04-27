@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
-    "name": "Simple Tab Scheduler",
-    "description": "Simple tab scheduler recommended for classes and Google Meet",
+    "name": "Hourglass",
+    "description": "Hourglass is an automation tool that you can use to automate your tabs",
     "version": "1.0",
     "background": {
         "service_worker": "background.js"
@@ -15,10 +15,5 @@
             "128": "icons/icon128.png"
         }
     },
-    "permissions": [
-        "tabs",
-        "alarms",
-        "notifications",
-        "storage"
-    ]
+    "permissions": ["tabs", "alarms", "notifications", "storage"]
 }
