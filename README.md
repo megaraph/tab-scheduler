@@ -179,7 +179,7 @@ Distributed under the GNU General Public License. See `LICENSE.txt` for more inf
 [issues-shield]: https://img.shields.io/github/issues/megaraph/tab-scheduler.svg?style=for-the-badge
 [issues-url]: https://github.com/megaraph/tab-scheduler/issues
 [license-shield]: https://img.shields.io/github/license/megaraph/tab-scheduler.svg?style=for-the-badge
-[license-url]: https://github.com/megaraph/tab-scheduler/blob/main/LICENSE.txt
+[license-url]: https://github.com/megaraph/tab-scheduler/blob/main/LICENSE
 [product-screenshot]: images/product-shot.png
 [Javascript.com]: https://img.shields.io/badge/JavaScript-fcfc02?style=for-the-badge&logo=javascript&logoColor=black
 [Javascript-url]: https://developer.mozilla.org/en-US/docs/Web/javascript
