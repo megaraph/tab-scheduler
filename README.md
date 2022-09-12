@@ -88,11 +88,14 @@
   ```
   chrome://extensions
   ```
-  ![Step 4](images/step-4-screenshot.png)
+  ![Step 4](images/step-4-screenshot.png) 
+  <br>
 5. Find the developer mode option and toggle it on.
   ![Step 5](images/step-5-screenshot.png)
-6. Click on the `Load unpacked` button and select the extracted folder from `step 3`. <br>
+6. Click on the `Load unpacked` button and select the extracted folder from `step 3`. 
+<br>
 7. You may pin the extension if you wish.
+  <br>
   ![Step 7](images/step-7-screenshot.png)
 
 ### Installation (via git clone)
@@ -103,6 +106,7 @@
 2. Follow steps 4 to 5 in the installation guide for zipped file.
 3. Click on the `Load unpacked` button and select the cloned repository folder
 4. You may pin the extension if you wish.
+  <br>
   ![Step 7](images/step-7-screenshot.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -121,12 +125,15 @@ Some of the use cases of this extension:
 ### Using the extension
 
 1. Select a day in the dropdown. The current day is selected by default.
+  <br>
   ![Usage Step 1](images/usage-1.png)
 2. Click on the `NEW ITEM` button
 3. Click on the edit button to fill in tab details.
+  <br>
   ![Usage Step 3](images/usage-3.png)
 4. Fill in details for the tab you want to open.
 5. Click the save button. Make sure to click the save button before exiting the extension. Pressing the enter key on your keyboard does not work.
+  <br>
   ![Usage Step 5](images/usage-5.png)
 
 
